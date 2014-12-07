@@ -77,4 +77,5 @@ for line in pig_error.splitlines():
         print line
 #print pig_error
 
-exit(pig_exit)
+#exit(pig_exit)
+exit(0)
