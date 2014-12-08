@@ -68,13 +68,14 @@ if pig_exit == 0:
 #
 # Process & Format the results
 #print pig_out
-re_ERROR = re.compile('.*ERROR.*')
-re_ERROR_INFO = re.compile('^<.*> ')
+re_GRUNTERROR = re.compile('^.* ERROR org.apache.pig.tools.grunt.Grunt - (ERROR.*)$')
 for line in pig_error.splitlines():
-    if re_ERROR.match(line):
+    m=re_GRUNTERROR.match(line)
+    if m:
+        print m.group(1)
+    elif args.debug:
         print line
-    elif re_ERROR_INFO.match(line):
-        print line
+
 #print pig_error
 
 #exit(pig_exit)
