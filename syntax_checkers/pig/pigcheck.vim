@@ -17,6 +17,7 @@ function! SyntaxCheckers_pig_pigcheck_GetLocList() dict
     let makeprg = self.makeprgBuild({})
 
     let errorformat =
+        \ 'ERROR %n: %m at line %l\, column %c.,'.
         \ 'ERROR %n: <file %f\, line %l\, column %c> %m,'.
         \ '<file %f\, line %l\, column %c> %m,'.
         \ '%-G%.%#'
