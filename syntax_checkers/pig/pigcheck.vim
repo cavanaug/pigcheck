@@ -35,8 +35,6 @@ function! SyntaxCheckers_pig_pigcheck_GetLocList() dict
         elseif e['type'] ==? 'I'
             let e['type'] = 'W'
             let e['subtype'] = 'Style'
-        else
-            let e['type'] = 'E'
         endif
     endfor
 
