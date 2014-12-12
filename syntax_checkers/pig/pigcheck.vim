@@ -17,14 +17,16 @@ function! SyntaxCheckers_pig_pigcheck_GetLocList() dict
     let makeprg = self.makeprgBuild({})
 
     let errorformat =
-        \ 'ERROR %n: %m at line %l\, column %c.,'.
-        \ 'ERROR %n: <file %f\, line %l\, column %c> %m,'.
+        \ '%tRROR %n: %m at line %l\, column %c.,'.
+        \ '%tRROR %n: %m: <file %f\, line %l\, column %c> %s,'.
+        \ '%tRROR %n: <file %f\, line %l\, column %c> %m,'.
         \ '<file %f\, line %l\, column %c> %m,'.
         \ '%-G%.%#'
 
     let loclist = SyntasticMake({
         \ 'makeprg': makeprg,
         \ 'errorformat': errorformat,
+        \ 'defaults': { 'bufnr': bufnr(''), 'text': 'Syntax error' },
         \ 'returns': [0, 1] })
 
     for e in loclist
@@ -33,6 +35,8 @@ function! SyntaxCheckers_pig_pigcheck_GetLocList() dict
         elseif e['type'] ==? 'I'
             let e['type'] = 'W'
             let e['subtype'] = 'Style'
+        else
+            let e['type'] = 'E'
         endif
     endfor
 

@@ -11,7 +11,6 @@
 VERSION = '1.0.2'
 
 import re
-import os
 import argparse
 import subprocess
 
@@ -101,5 +100,4 @@ for line in pig_error.splitlines():
     elif re_MULTI_LINE_LOC.match(line):
         print previous + line
 
-exit(0)
-
+exit(1)
